@@ -17,6 +17,7 @@ class GreatMigration
       :provider => 'aws',
       :aws_access_key_id => options[:aws_key],
       :aws_secret_access_key => options[:aws_secret]
+      :region => 'us-west-2'
     })
     @rackspace_directory = rackspace.directories.get(options[:rackspace_container])
     @aws_directory = aws.directories.get(options[:aws_bucket])
@@ -86,6 +87,7 @@ class GreatMigration
       # skip directories
     else
       aws_directory.files.create(
+        :region => 'us-west-2',
         :key          => file.key,
         :body         => file.body,
         :content_type => file.content_type,
